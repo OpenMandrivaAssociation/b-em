@@ -1,0 +1,33 @@
+--- src/linux.c.orig	2010-12-12 09:24:12.539177018 +0000
++++ src/linux.c	2010-12-12 09:25:16.564177005 +0000
+@@ -51,7 +51,7 @@
+ 
+ void bem_error(char *s)
+ {
+-        allegro_message(s);
++        allegro_message("%s",s);
+ }
+ //#undef printf
+ int main(int argc, char *argv[])
+--- src/linux-keydefine.c.orig	2010-12-12 09:30:05.997177648 +0000
++++ src/linux-keydefine.c	2010-12-12 09:30:13.616176994 +0000
+@@ -76,7 +76,7 @@
+                         }
+                 }
+ 
+-                textprintf_ex(screen,font,x+8,y+40,makecol(255,255,255),makecol(0,0,0),s);
++                textprintf_ex(screen,font,x+8,y+40,makecol(255,255,255),makecol(0,0,0),"%s",s);
+                 
+                 textprintf_ex(screen,font,x+8,y+56,makecol(255,255,255),makecol(0,0,0),"Please press new key...");
+ getnewkey:
+--- src/debugger.c.orig	2015-03-01 09:08:07.395080775 +0000
++++ src/debugger.c	2015-03-01 09:08:29.084079178 +0000
+@@ -213,7 +213,7 @@
+ 
+ static void debug_out(char *s)
+ {
+-        printf(s);
++        printf("%s", s);
+         fflush(stdout);
+ }
+ 
