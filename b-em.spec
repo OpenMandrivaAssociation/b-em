@@ -10,7 +10,7 @@ Version:	%{version}
 Release:	%{release}
 Source0:	http://b-em.bbcmicro.com/%{bin_name}V%{version}Linux.tar.gz
 Patch0:		gcc_error.patch
-Patch1:		b-em2.1_romloc.patch
+Patch1:		b-em-2.2-romloc.patch
 URL:		http://b-em.bbcmicro.com/index.html
 License:	Other
 Group:		Emulators
@@ -25,7 +25,7 @@ A Freeware BBC Micro Emulator for DOS, Windows and Mac OS X.
 %prep
 %setup -q -c %{name}-%{version}
 %patch0
-%patch1
+%patch1 -p1
 
 %build
 %configure

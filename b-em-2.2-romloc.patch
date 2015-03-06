@@ -1,0 +1,146 @@
+diff -urw t.orig/src/32016.c t/src/32016.c
+--- t.orig/src/32016.c	2012-04-16 16:38:34.000000000 +0100
++++ t/src/32016.c	2015-03-06 20:15:30.823118094 +0000
+@@ -86,7 +86,7 @@
+         char fn[512];
+         if (!ns32016rom) ns32016rom=malloc(0x8000);
+         if (!ns32016ram) ns32016ram=malloc(0x100000);
+-        append_filename(fn,exedir,"roms/tube/Pandora.rom",511);
++        append_filename(fn,exedir,"../share/b-em/roms/tube/Pandora.rom",511);
+         f=fopen(fn,"rb");
+         fread(ns32016rom,0x8000,1,f);
+         fclose(f);
+diff -urw t.orig/src/6502tube.c t/src/6502tube.c
+--- t.orig/src/6502tube.c	2012-04-14 17:52:50.000000000 +0100
++++ t/src/6502tube.c	2015-03-06 20:15:30.934118096 +0000
+@@ -37,7 +37,7 @@
+ {
+         FILE *f;
+         char fn[512];
+-                append_filename(fn,exedir,"roms/tube/6502Tube.rom",511);
++                append_filename(fn,exedir,"../share/b-em/roms/tube/6502Tube.rom",511);
+                 f=fopen(fn,"rb");
+                 fread(tuberom+0x800,0x800,1,f);
+         fclose(f);
+diff -urw t.orig/src/65816.c t/src/65816.c
+--- t.orig/src/65816.c	2012-04-16 17:14:48.000000000 +0100
++++ t/src/65816.c	2015-03-06 20:15:30.940118096 +0000
+@@ -4688,7 +4688,7 @@
+         char fn[512];
+         if (!w65816rom) w65816rom=malloc(0x8000);
+         if (!w65816ram) w65816ram=malloc(0x80000);
+-                append_filename(fn,exedir,"roms/tube/ReCo6502ROM_816",511);
++                append_filename(fn,exedir,"../share/b-em/roms/tube/ReCo6502ROM_816",511);
+                 f=fopen(fn,"rb");
+                 fread(w65816rom,0x8000,1,f);
+         fclose(f);
+diff -urw t.orig/src/arm.c t/src/arm.c
+--- t.orig/src/arm.c	2012-04-14 17:14:38.000000000 +0100
++++ t/src/arm.c	2015-03-06 20:15:30.944118096 +0000
+@@ -206,7 +206,7 @@
+         if (!armram) armram=(uint32_t *)malloc(0x400000);
+         armromb=(uint8_t *)armrom;
+         armramb=(uint8_t *)armram;
+-        append_filename(fn,exedir,"roms/tube/ARMeval_100.rom",511);
++        append_filename(fn,exedir,"../share/b-em/roms/tube/ARMeval_100.rom",511);
+         f=fopen(fn,"rb");
+         fread(armromb,0x4000,1,f);
+         fclose(f);
+diff -urw t.orig/src/ddnoise.c t/src/ddnoise.c
+--- t.orig/src/ddnoise.c	2012-04-14 22:38:22.000000000 +0100
++++ t/src/ddnoise.c	2015-03-06 20:18:23.551121059 +0000
+@@ -28,8 +28,8 @@
+ {
+         char path[512], p2[512];
+         getcwd(p2, 511);
+-        if (ddnoise_type) sprintf(path, "%sddnoise/35",  exedir);
+-        else              sprintf(path, "%sddnoise/525", exedir);
++        if (ddnoise_type) sprintf(path, "%s../share/b-em/ddnoise/35",  exedir);
++        else              sprintf(path, "%s../share/b-em/ddnoise/525", exedir);
+ //        printf("path now %s\n",path);
+         chdir(path);
+         seeksmp[0][0] = load_wav("stepo.wav");
+diff -urw t.orig/src/main.c t/src/main.c
+--- t.orig/src/main.c	2012-04-16 17:19:48.000000000 +0100
++++ t/src/main.c	2015-03-06 20:15:30.954118096 +0000
+@@ -131,7 +131,7 @@
+         al_init_main(argc, argv);
+         
+         
+-        append_filename(t, exedir, "roms\\tube\\ReCo6502ROM_816", 511);
++        append_filename(t, exedir, "../share/b-em/roms\\tube\\ReCo6502ROM_816", 511);
+         if (!file_exists(t,FA_ALL,NULL) && selecttube == 4) selecttube = -1;
+ 
+         curtube = selecttube;
+diff -urw t.orig/src/mem.c t/src/mem.c
+--- t.orig/src/mem.c	2012-04-15 18:16:58.000000000 +0100
++++ t/src/mem.c	2015-03-06 20:16:16.685118881 +0000
+@@ -117,7 +117,7 @@
+                 fclose(f);
+         }
+         getcwd(p2, 511);
+-        sprintf(path, "%sroms/%s", exedir, romdir);
++        sprintf(path, "%s../share/b-em/roms/%s", exedir, romdir);
+         chdir(path);
+         mem_loadswroms();
+         chdir(p2);
+diff -urw t.orig/src/model.c t/src/model.c
+--- t.orig/src/model.c	2012-04-15 18:16:48.000000000 +0100
++++ t/src/model.c	2015-03-06 20:15:30.955118096 +0000
+@@ -73,7 +73,7 @@
+ 
+         
+         getcwd(t, 511);
+-        append_filename(t2, exedir, "roms", 511);
++        append_filename(t2, exedir, "../share/b-em/roms", 511);
+         chdir(t2);
+         mem_clearroms();
+         if (models[curmodel].romsetup) models[curmodel].romsetup();
+diff -urw t.orig/src/tapenoise.c t/src/tapenoise.c
+--- t.orig/src/tapenoise.c	2012-04-14 22:38:40.000000000 +0100
++++ t/src/tapenoise.c	2015-03-06 20:17:45.481120405 +0000
+@@ -26,7 +26,7 @@
+         int c;
+ 
+         getcwd(p2, 511);
+-        sprintf(path, "%sddnoise", exedir);
++        sprintf(path, "%s../share/b-em/ddnoise", exedir);
+ //        printf("path now %s\n",path);
+         chdir(path);
+         tsamples[0] = load_wav("motoron.wav");
+diff -urw t.orig/src/win.c t/src/win.c
+--- t.orig/src/win.c	2012-05-22 12:39:06.000000000 +0100
++++ t/src/win.c	2015-03-06 20:15:30.964118096 +0000
+@@ -168,7 +168,7 @@
+         
+         CheckMenuItem(hmenu, IDM_VIDEO_NOBORDERS + vid_fullborders, MF_CHECKED);
+         
+-        append_filename(t, exedir, "roms\\tube\\ReCo6502ROM_816", 511);
++        append_filename(t, exedir, "../share/b-em/roms\\tube\\ReCo6502ROM_816", 511);
+         if (!file_exists(t, FA_ALL, NULL)) EnableMenuItem(hmenu, IDM_TUBE_65816, MF_GRAYED);
+         
+         if (keyas)     CheckMenuItem(hmenu, IDM_KEY_AS, MF_CHECKED);
+diff -urw t.orig/src/x86.c t/src/x86.c
+--- t.orig/src/x86.c	2012-04-16 16:37:22.000000000 +0100
++++ t/src/x86.c	2015-03-06 20:15:30.969118096 +0000
+@@ -335,7 +335,7 @@
+         if (!x86rom) x86rom=malloc(0x4000);
+         x86makeznptable();
+         memset(x86ram,0,0x100000);
+-        append_filename(fn,exedir,"roms/tube/BIOS.ROM",511);
++        append_filename(fn,exedir,"../share/b-em/roms/tube/BIOS.ROM",511);
+         f=fopen(fn,"rb");
+         fread(x86rom,0x4000,1,f);
+         fclose(f);
+diff -urw t.orig/src/Z80.c t/src/Z80.c
+--- t.orig/src/Z80.c	2012-04-15 16:08:56.000000000 +0100
++++ t/src/Z80.c	2015-03-06 20:15:30.973118096 +0000
+@@ -296,7 +296,7 @@
+ {
+         FILE *f;
+         char fn[512];
+-        append_filename(fn,exedir,"roms/tube/Z80_120.rom",511);
++        append_filename(fn,exedir,"../share/b-em/roms/tube/Z80_120.rom",511);
+         f=fopen(fn,"rb");
+         fread(z80rom,0x1000,1,f);
+         fclose(f);
