@@ -1,7 +1,7 @@
 %define	name	b-em
 %define bin_name B-em
 %define	version	2.2
-%define release	2
+%define release	3
 %define	summary B-em BBC Micro Emulator
 
 Name:		%{name}
