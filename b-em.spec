@@ -11,6 +11,7 @@ Group:		Emulators
 BuildRequires:	freealut-devel 
 BuildRequires:	openal-devel
 BuildRequires:  allegro-devel
+BuildRequires:	zlib-devel
 
 %description
 A Freeware BBC Micro Emulator for DOS, Windows and Mac OS X.
