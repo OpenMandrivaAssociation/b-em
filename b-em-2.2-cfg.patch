@@ -1,0 +1,87 @@
+--- t.old/src/b-em.h	2012-04-15 16:24:52.000000000 +0100
++++ t/src/b-em.h	2024-04-06 12:53:51.878111919 +0100
+@@ -24,6 +24,7 @@
+ void rpclog(const char *format, ...);
+ 
+ extern char exedir[512];
++extern char cfgdir[512];
+ 
+ extern int joybutton[2];
+ 
+--- t.old/src/ide.c	2012-04-12 22:17:18.000000000 +0100
++++ t/src/ide.c	2024-04-06 12:55:40.170618447 +0100
+@@ -37,7 +37,7 @@
+         ide_count = 0;
+         if (!hdfile[0])
+         {
+-                sprintf(s, "%shd4.hdf", exedir);
++                sprintf(s, "%shd4.hdf", cfgdir);
+                 hdfile[0] = fopen(s, "rb+");
+                 if (!hdfile[0])
+                 {
+@@ -49,7 +49,7 @@
+         }
+         if (!hdfile[1])
+         {
+-                sprintf(s, "%shd5.hdf", exedir);
++                sprintf(s, "%shd5.hdf", cfgdir);
+                 hdfile[1] = fopen(s, "rb+");
+                 if (!hdfile[1])
+                 {
+--- t.old/src/config.c	2012-05-22 12:41:10.000000000 +0100
++++ t/src/config.c	2024-04-06 12:55:53.659182875 +0100
+@@ -27,7 +27,7 @@
+         int c;
+         char s[256];
+         char *p;
+-        sprintf(s, "%sb-em.cfg", exedir);
++        sprintf(s, "%sb-em.cfg", cfgdir);
+         //printf("%s\n",s);
+         set_config_file(s);
+         
+@@ -90,7 +90,7 @@
+ {
+         int c;
+         char s[256];
+-        sprintf(s, "%sb-em.cfg", exedir);
++        sprintf(s, "%sb-em.cfg", cfgdir);
+         set_config_file(s);
+         set_config_string(NULL, "disc0", discfns[0]);
+         set_config_string(NULL, "disc1", discfns[1]);
+--- t.old/src/linux.c	2012-04-16 16:37:00.000000000 +0100
++++ t/src/linux.c	2024-04-06 12:59:52.098470463 +0100
+@@ -2,13 +2,13 @@
+   Linux main*/
+ 
+ #ifndef WIN32
++#include <sys/stat.h>
+ #include <allegro.h>
+ #include "b-em.h"
+ #include "config.h"
+ #include "linux-gui.h"
+ #include "main.h"
+ #include "video_render.h"
+-
+ int winsizex, winsizey;
+ int videoresize = 0;
+ 
+@@ -63,6 +63,9 @@
+         get_executable_name(exedir, 511);
+         p = get_filename(exedir);
+         p[0] = 0;
++        strcpy(cfgdir, getenv("HOME"));
++        strcat(cfgdir, "/.config/b-em/");
++        mkdir(cfgdir, S_IRWXU);
+         config_load();
+ //        printf("Main\n");
+         main_init(argc, argv);
+--- t.old/src/main.c	2012-04-16 17:19:48.000000000 +0100
++++ t/src/main.c	2024-04-06 12:51:31.144640809 +0100
+@@ -93,6 +93,7 @@
+ }
+ 
+ char exedir[512];
++char cfgdir[512];
+ int debug = 0, debugon = 0;
+ int ddnoiseframes = 0;
+ 
