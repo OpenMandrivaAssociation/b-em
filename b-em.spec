@@ -8,7 +8,7 @@ Source2:	b-em.svg
 Patch0:		gcc_error.patch
 Patch1:		b-em-2.2-romloc.patch
 Patch2:		b-em-2.2-cfg.patch
-URL:		http://b-em.bbcmicro.com/index.html
+URL:		https://b-em.bbcmicro.com/index.html
 License:	Other
 Group:		Emulators
 BuildRequires:	freealut-devel 
