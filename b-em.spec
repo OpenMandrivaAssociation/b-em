@@ -11,6 +11,11 @@ Patch2:		b-em-2.2-cfg.patch
 URL:		https://b-em.bbcmicro.com/index.html
 License:	Other
 Group:		Emulators
+BuildRequires:	autoconf
+BuildRequires:	automake
+BuildRequires:	libtool-base
+BuildRequires:	slibtool
+BuildRequires:	make
 BuildRequires:	freealut-devel 
 BuildRequires:	openal-devel
 BuildRequires:  allegro-devel
